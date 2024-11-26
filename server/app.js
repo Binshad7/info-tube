@@ -6,6 +6,7 @@ const env = require('dotenv')
 env.config()
 
 
+console.log('hello');
 
 
 app.listen(process.env.PORT,()=>{
