@@ -8,6 +8,7 @@ env.config()
 // mongoose connection
 // const connect = require('./config/connection'); 
 
+console.log('hello');
 
 // connect()
 // .then((res)=>{
