@@ -12,7 +12,7 @@ const Header = ({ onSearch }) =>{
   <header className="flex items-center justify-between p-4 bg-white border-b">
     <div className="flex items-center space-x-4">
       <Menu className="w-6 h-6 cursor-pointer" onClick={updateIsOpen}/>
-      <h1 className="text-2xl font-bold text-red-600">YouTube</h1>
+      <h1 className="text-2xl font-bold text-red-600">InfoTube</h1>
     </div>
     <div className="flex flex-1 mx-4 max-w-2xl">
       <input

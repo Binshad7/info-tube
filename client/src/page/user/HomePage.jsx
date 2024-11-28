@@ -30,6 +30,27 @@ function HomePage() {
       channel: "Tech Tips",
       views: "75K",
       timestamp: "3 days ago"
+    },
+    {
+      id: 4,
+      title: "Web Development Tips",
+      channel: "Tech Tips",
+      views: "75K",
+      timestamp: "3 days ago"
+    },
+    {
+      id: 5,
+      title: "Web Development Tips",
+      channel: "Tech Tips",
+      views: "75K",
+      timestamp: "3 days ago"
+    },
+    {
+      id: 6,
+      title: "Web Development Tips",
+      channel: "Tech Tips",
+      views: "75K",
+      timestamp: "3 days ago"
     }
   ]);
 
