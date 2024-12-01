@@ -1,78 +1,96 @@
-import React, { useState } from 'react'
-import Header from '../../components/user/Header/Header'
-import VideoCard from '../../components/user/VideoCard/VideoCard'
-import Sidebar from '../../components/user/SideBar/SideBar';
+
+import { VideoCard } from '../../assets/VideoCard';
+// Header.jsx
+import React, { useEffect, useState } from 'react';
+import Header from '../../components/user/Header/Header';
+import Sidebars from '../../components/user/SideBar/SideBar';
+import { CategoryBar } from '../../components/user/category/Category';
+import SignCard from '../../components/user/SignCard';
 
 
 
+export const VideoGrid = ({ videos }) => {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {videos.map((video) => (
+        <VideoCard key={video.id} video={video} />
+      ))}
+    </div>
+  );
+};
 
-function HomePage() {
 
-  const [searchQuery, setSearchQuery] = useState("");
-  const [videos] = useState([
+
+const App = () => {
+  const categories = [
+    'Network', 'Sports', 'Educational', 'Musician', 'Deportes', 'Gastronomic'
+  ];
+
+  const [isFirst, setIsFirst] = useState(true)
+  const videos = [
     {
       id: 1,
-      title: "Learn React in 30 Minutes",
-      channel: "Dev Channel",
-      views: "100K",
-      timestamp: "2 days ago"
+      thumbnail: "/api/placeholder/400/250",
+      duration: "12:43",
+      title: "Tutorial",
+      brand: "NIKON CORPORATION",
+      views: "2.5K"
     },
     {
       id: 2,
-      title: "Build a YouTube Clone",
-      channel: "Code Masters",
-      views: "50K",
-      timestamp: "1 week ago"
+      thumbnail: "/api/placeholder/400/250",
+      duration: "32:00",
+      title: "Tutorial",
+      brand: "Canon EOS REBEL",
+      views: "7.8K"
     },
     {
       id: 3,
-      title: "Web Development Tips",
-      channel: "Tech Tips",
-      views: "75K",
-      timestamp: "3 days ago"
+      thumbnail: "/api/placeholder/400/250",
+      duration: "22:43",
+      title: "Tutorial",
+      brand: "SONY ILCE-7M2",
+      views: "12.9K"
     },
     {
       id: 4,
-      title: "Web Development Tips",
-      channel: "Tech Tips",
-      views: "75K",
-      timestamp: "3 days ago"
+      thumbnail: "/api/placeholder/400/250",
+      duration: "12:43",
+      title: "Tutorial",
+      brand: "NIKON CORPORATION",
+      views: "5.2K"
     },
     {
       id: 5,
-      title: "Web Development Tips",
-      channel: "Tech Tips",
-      views: "75K",
-      timestamp: "3 days ago"
+      thumbnail: "/api/placeholder/400/250",
+      duration: "32:00",
+      title: "Tutorial",
+      brand: "Canon EOS REBEL",
+      views: "9.5K"
     },
     {
       id: 6,
-      title: "Web Development Tips",
-      channel: "Tech Tips",
-      views: "75K",
-      timestamp: "3 days ago"
+      thumbnail: "/api/placeholder/400/250",
+      duration: "22:43",
+      title: "Tutorial",
+      brand: "SONY ILCE-7M2",
+      views: "13.5K"
     }
-  ]);
-
-  const filteredVideos = videos.filter(video =>
-    video.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  ];
 
   return (
-    <div className="h-screen flex flex-col bg-white">
-      <Header onSearch={setSearchQuery} />
-      <div className="flex flex-1 overflow-hidden">
-        <Sidebar />
-        <main className="flex-1 p-4 overflow-y-auto bg-gray-50">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filteredVideos.map(video => (
-              <VideoCard key={video.id} video={video} />
-            ))}
-          </div>
+    <div className="min-h-screen bg-gray-900 text-white">
+      {isFirst && <SignCard setIsFirst={setIsFirst}/>}
+      <Header />
+      <div className="flex">
+        <Sidebars />
+        <main className="flex-1 p-6">
+          <CategoryBar categories={categories} />
+          <VideoGrid videos={videos} />
         </main>
       </div>
     </div>
   );
-}
+};
 
-export default HomePage
+export default App;

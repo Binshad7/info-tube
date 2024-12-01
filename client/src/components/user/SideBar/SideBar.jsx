@@ -1,29 +1,54 @@
-import { Video, User, Home } from 'lucide-react';
-import { useContext } from 'react';
+import { Home, Grid, Clock, Heart, ThumbsUp, Upload} from 'lucide-react';
+
+import { useContext, useEffect, useState } from 'react';
 import { SidebarContext } from '../../../context/slidebarContext';
 
-const Sidebar = () => {
-
+const Sidebars = () => {
+  const [state, setState] = useState(false)
   const {isOpen} = useContext(SidebarContext) // expanding context for slidebar
 
+  const icons = [
+    {icon: Home,name: "home"},
+    {icon:Grid, name: "f"}, 
+    {icon: Clock, name:"s"}, 
+    {icon: Heart, name: "likes"}, 
+    {icon:ThumbsUp, name: "likes"}, 
+    {icon:Upload, name: "upload"}
+  ];
+
+  useEffect(() => {
+    if (isOpen) {
+      const timer = setTimeout(() => {
+        setState(true);
+      }, 300); // 2 seconds delay
+
+      return () => clearTimeout(timer); // Cleanup timer
+    } else {
+      setState(false); // Reset if `isUser` becomes false
+    }
+  }, [isOpen]);
+
   return (
-    <div className={ `transition-[width] duration-1000 ease-in-out p-4 border-r h-screen hidden md:block transition ${isOpen ? "w-[250px]" : "w-[70px]"} `}>
-      <div className="flex flex-col space-y-2">
-        <button className="flex items-center space-x-2 p-2 bg-gray-100 rounded shadow-md ">
-          <Home className="w-5 h-5" />
-          {isOpen && <span>Home</span>}
-        </button>
-        <button className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded">
-          <Video className="w-5 h-5" />
-          {isOpen && <span>Subscriptions</span>}
-        </button>
-        <button className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded">
-          <User className="w-5 h-5" />
-          {isOpen && <span>Library</span>}
-        </button>
+    <aside className={` bg-gray-900 border-r border-gray-800 ${isOpen ? 'w-[230px]': 'w-[56px]'}`}>
+      <div className={`flex flex-col items-center py-4 space-y-6`}>
+        {icons.map((obj, index) => {
+          let Icon = obj.icon;
+          
+          return( 
+            <div className={`flex justify-center w-[100%]`}>
+              <Icon
+                key={index} 
+                className="w-6 h-6 text-gray-400 hover:text-white cursor-pointer" 
+              />
+              <h3 className=''>{state ? obj.name : ""}</h3>
+            </div>
+          )
+        })}
       </div>
-    </div>
+    </aside>
+      
+    
   );
 
 }
-export default Sidebar
+export default Sidebars
